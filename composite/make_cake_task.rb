@@ -6,6 +6,6 @@ require 'make_batter_task'
 class MakeCakeTask < CompositeTask
   def initialize
     super 'Make Cake'
-    add_sub_task MakeBatterTask.new
+    self << MakeBatterTask.new
   end
 end
