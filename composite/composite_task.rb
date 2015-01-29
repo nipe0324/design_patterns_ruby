@@ -28,4 +28,8 @@ class CompositeTask < Task
   def get_time_required
     @sub_tasks.inject(0.0) { |sum, task| sum += task.get_time_required }
   end
+
+  def total_number_basic_tasks
+    @sub_tasks.inject(0) { |sum, task| sum += task.total_number_basic_tasks }
+  end
 end
