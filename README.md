@@ -6,7 +6,7 @@
 
 * [テンプレートメソッド](#template-method)
 * [ストラテジ](#strategy)
-* [Observer](#observer)
+* [オブサーバー](#observer)
 * [Composite](#composite)
 * [Iterator](#iterator)
 * [Commands](#commands)
@@ -60,3 +60,31 @@
 実例:
   * rdocユーティリティ - Ruby, C, FORTRANのソースからドキュメントを抜き出せるので、パーサがストラテジになっている。またriコマンドでHTML形式やXML形式など出力形式を選べる。これもストラテジ。
 
+
+
+### オブサーバー<a name="observer"></a>
+
+目的/概要:
+
+  * あるコンポーネントの動きを監視するコンポーネントを作ることができる。
+    Observableオブジェクト(発信元)で発生したイベントをObserverオブジェクト(受信先)が受け取り処理をする。
+  * ニュースの配信元（Observableオブジェクト）とニュースの消費者側（Observerオブジェクト）の間にインターフェイスをつくることで、Observerパターンはニュースをスムーズに渡すことができます。
+
+やり方:
+  1. Observableクラス(発信元)に対して、`include Observable`を宣言し、通知したい箇所で`notify_observers`メソッドを呼び出す。
+  2. Observerクラス(受信先)に`update`メソッドを実装する
+  3. どこかの処理で、Observableインスタンスの`add_observer`メソッドを使い、Observerインスタンスを登録する。
+
+注意点:
+  * Observableインスタンスの更新の頻度とタイミングを見極めないのと、莫大な通知イベントが走ってしまう。
+
+実例:
+  * ActiveRecord::Observer - レコードの作成、読み込み、書き込み、削除がされるたびに通知をうけたい場合、after_create, after_updateなどオブザーバーを定義できます。
+
+
+------
+
+### Todo
+
+  * 各デザインパターンのクラス図とそのときの挙動の流れを細くする。
+  * わかりやすいように、「やり方」の各ステップの下にソースコードを記載し、最後に出力を記載したほうが良いかも。
