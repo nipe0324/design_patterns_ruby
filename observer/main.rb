@@ -1,8 +1,10 @@
 require 'employee'
 require 'payroll'
 
+fred = Employee.new('Fred Flintstone', 'Crane Operator', 30_000)
+
 payroll = Payroll.new
-fred = Employee.new('Fred Flintstone', 'Crane Operator', 30_000, payroll)
+fred.add_observer payroll
 
 # フレッドを昇給させる
 fred.salary = 35_000
