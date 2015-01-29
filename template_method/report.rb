@@ -4,16 +4,30 @@ class Report
     @text  = %w(順調 最高の調子)
   end
 
-  def output_report
-    puts '<html>'
-    puts '  <head>'
-    puts "    <title>#{@title}</title>"
-    puts '  </head>'
-    puts '  <body>'
-    @text.each do |line|
-      puts("    <p>#{line}</p>")
+  def output_report(format)
+    if format == :plain
+      puts("*** #{@title} ***")
+    elsif format == :html
+      puts '<html>'
+      puts '  <head>'
+      puts "    <title>#{@title}</title>"
+      puts '  </head>'
+      puts '  <body>'
+    else
+      raise "Unknown format: #{format}"
     end
-    puts '  </body>'
-    puts '</html>'
+
+    @text.each do |line|
+      if format == :plain
+        puts line
+      else
+        puts "    <p>#{line}</p>"
+      end
+    end
+
+    if format == :html
+      puts '  </body>'
+      puts '</html>'
+    end
   end
 end
