@@ -10,4 +10,11 @@ cmds.add_command CopyFile.new('file1.txt', 'file2.txt')
 cmds.add_command DeleteFile.new('file1.txt')
 
 puts cmds.description
+
+# コマンドを実行
 cmds.execute
+
+sleep 3
+
+# コマンドを戻す
+cmds.unexecute
