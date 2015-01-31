@@ -8,7 +8,7 @@
 * [ストラテジ](#strategy)
 * [オブサーバー](#observer)
 * [コンポジット](#composite)
-* [Iterator](#iterator)
+* [イテレータ](#iterator)
 * [Commands](#commands)
 * [Adapter](#adapter)
 * [Proxy](#proxy)
@@ -102,6 +102,53 @@
 実例:
   * GUIライブラリ(FXRuby)
 
+
+### イテレータ<a name="iterator"></a>
+
+目的/概要:
+  * コレクションの各要素にアクセスする
+  * 外部イテレータ(コレクションのメンバーを指し示すオブジェクト)と内部イテレータ(子オブジェクトを扱うためのコードを渡す)がある。
+
+やり方:
+  1. 基本的にはeach_xxxメソッドとしてRubyに定義されている
+  2. 自前で作ったクラスにイテレータを実装したい場合、Enumerableモジュールをincludeし、eachメソッドを定義する。すると、さまざまなメソッドが使えるようになる。(参照:[Enumerable Module](http://docs.ruby-lang.org/ja/2.0.0/class/Enumerable.html))
+
+注意点:
+  * 集約オブジェクトを繰り返し走査しているときに、集約オブジェクトが変更(追加/削除など)が発生した場合に、うまく対処できない
+  ```Ruby
+  array = %w(red green blue purple)
+  array.each do |color|
+    puts color
+    # 集約オブジェクトの操作中に、集約オブジェクトを削除している
+    array.delete color if color == 'green'
+  end
+  ```
+
+  blue が表示されない。greenを消したことでイテレータのインデックスがずれてしまったため。
+  ```Ruby
+  red
+  green
+  purple
+  ```
+
+
+実例:
+  * Rubyの配列、ハッシュなどさまざまな箇所で見られる。
+  * IOオブジェクトでは、「外部イテレータ」と「内部イテレータ」の両方がみれる
+  ```Ruby
+  # 外部イテレータ
+  f = File.open('file.txt')
+  until f.eof?
+    puts f.readline
+  end
+  f.close
+
+
+  # 内部イテレータ
+  f = File.open('file.txt')
+  f.each { |line| puts line }
+  f.close
+  ```
 
 ------
 
