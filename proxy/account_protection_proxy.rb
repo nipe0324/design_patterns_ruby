@@ -6,22 +6,12 @@ require 'etc'
 # プロキシに追加したほうが関心事の分離を上手く行える
 class AccountProtectionProxy
   def initialize(real_account, owner_name)
-    @real_account, @owner_name = real_account, owner_name
+    @subject, @owner_name = real_account, owner_name
   end
 
-  def balance
+  def method_missing(name, *args)
     check_access
-    @real_account.balance
-  end
-
-  def deposit(amount)
-    check_access
-    @real_account.deposit amount
-  end
-
-  def withdraw(amount)
-    check_access
-    @real_account.withdraw amount
+    @subject.send(name, *args)
   end
 
   def check_access
