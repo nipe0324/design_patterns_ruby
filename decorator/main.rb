@@ -34,6 +34,7 @@ writer2.close
 
 
 # ラッピングメソッド
+# デメリットとして、エイリアスで別名のついたメソッドを戻すことが面倒くさい
 writer3 = SimpleWriter.new 'rapping.txt'
 
 class << writer3
@@ -49,3 +50,11 @@ class << writer3
 end
 
 writer3.write_line "タイムスタンプ付き"
+
+
+# モジュールを利用する方法(も実装)
+# デメリットとして、モジュールを取り除くことができない
+# writer4 = SimpleWriter.new 'module.txt'
+# writer4.extend NumberingWriterModule
+# writer4.extend TimeStampingWriterModlue
+# writer4.writer_line "モジュールを利用する方法"
