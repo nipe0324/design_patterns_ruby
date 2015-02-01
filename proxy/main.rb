@@ -9,4 +9,4 @@ puts account.balance #=> 140 (100 + 50 - 10)
 proxy = BankAccountProxy.new account
 proxy.deposit 50
 proxy.withdraw 10
-puts account.balance #=> 180 (140 + 50 - 10)
+puts proxy.balance #=> 180 (140 + 50 - 10)
