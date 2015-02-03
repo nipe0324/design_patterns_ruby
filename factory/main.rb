@@ -1,11 +1,9 @@
 require 'habitat'
-require 'tiger'
-require 'tree'
-require 'duck'
-require 'water_lily'
+require 'jungle_organism_factory'
+require 'pond_organism_factory'
 
-jungle = Habitat.new(1, Tiger, 4, Tree)
+jungle = Habitat.new(1, 4, JungleOrganismFactory.new)
 jungle.simulate_one_day
 
-pond = Habitat.new(3, Duck, 2, WaterLily)
+pond = Habitat.new(3, 2, PondOrganismFactory.new)
 pond.simulate_one_day
