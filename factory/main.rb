@@ -1,8 +1,8 @@
-require 'duck_pond'
-require 'frog_pond'
+require 'duck_water_lily_pond'
+require 'frog_algae_pond'
 
-duck_pond = DuckPond.new(3)
-duck_pond.simulate_one_day
+pond1 = DuckWaterLilyPond.new(3, 2)
+pond1.simulate_one_day
 
-frog_pond = FrogPond.new(3)
-frog_pond.simulate_one_day
+pond2 = FrogAlgaePond.new(3, 2)
+pond2.simulate_one_day
