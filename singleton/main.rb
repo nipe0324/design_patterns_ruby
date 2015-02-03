@@ -7,3 +7,4 @@ puts logger.level
 SimpleLogger.instance.info('Computer wins chess game.')
 SimpleLogger.instance.warning('AE-35 hardware failure predicted.')
 SimpleLogger.instance.error('HAL-9000 malfunction, take emergency action!')
+SimpleLogger.instance.warning('Singleton モジュールでシングルトンパターンを実装')

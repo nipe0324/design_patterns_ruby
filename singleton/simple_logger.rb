@@ -1,4 +1,8 @@
+require 'singleton'
+
 class SimpleLogger
+  include Singleton
+
   attr_accessor :level
 
   ERROR = 1
@@ -10,13 +14,18 @@ class SimpleLogger
     @level = WARNING
   end
 
-  @@instance = self.new
-
-  def self.instance
-    @@instance
-  end
-
-  private_class_method :new
+  # Singletonモジュールは、
+  # - クラス変数を定義し、
+  # - シングルトンインスタンスで初期化し、instanceというクラスメソッドを作り
+  # - newメソッドをプライベート化します
+  #
+  # @@instance = self.new
+  #
+  # def self.instance
+  #   @@instance
+  # end
+  #
+  # private_class_method :new
 
   def error(msg)
     @log.puts(msg)
