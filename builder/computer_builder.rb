@@ -41,4 +41,20 @@ class ComputerBuilder
   def add_hard_disk(size_in_mb)
     @computer.drives << Drive.new(:hard_disk, size_in_mb, true)
   end
+
+  # マジックメソッド
+  #   次のようなメソッドを定義することができる
+  #   - builder.add_dvd_and_harddisk
+  #   - builder.add_turbo_and_dvd_and_harddisk
+  def method_missing(name, *args)
+    words = name.to_s.split "_"
+    return super(name, *args) unless words.shift == 'add'
+    words.each do |word|
+      next    if word == 'and'
+      add_cd  if word == 'cd'
+      add_dvd if word == 'dvd'
+      turbo   if word == 'turbo'
+      add_hard_disk(100000) if word == 'harddisk'
+    end
+  end
 end
