@@ -13,6 +13,15 @@ class ComputerBuilder
     @computer.motherboard.cpu = TurboCPU.new
   end
 
+  # オブジェクトの妥当性を保証できる
+  def computer
+    raise "メモリ容量が十分でありません" if @computer.motherboard.memory_size < 250
+    raise "ドライブが多すぎます"       if @computer.drives.size > 4
+    hard_disk = @computer.drives.find { |drive| drive.type == :hard_disk }
+    raise "ハードディスクがありません"  unless hard_disk
+    @computer
+  end
+
   def display=(display)
     @computer.display = display
   end

@@ -3,7 +3,7 @@
 # require 'cpu'
 # require 'computer'
 
-# # ビルダー導入前
+### ビルダー導入前 ###
 # # たくさんのメモリを積んだ高速なコンピューターを組み立てます
 # motherboard = Motherboard.new(TurboCPU.new, 4_000)
 
@@ -16,7 +16,8 @@
 # computer = Computer.new(:lcd, motherboard, drives)
 
 
-# ビルダー導入後
+
+### ビルダー導入後 ###
 require 'computer_builder'
 
 builder = ComputerBuilder.new
@@ -25,3 +26,8 @@ builder.add_cd(true)
 builder.add_dvd
 builder.add_hard_disk(100_000)
 computer = builder.computer
+
+
+builder2 = ComputerBuilder.new
+computer = builder2.computer
+# => ハードディスクがありません (RuntimeError)が発生する
