@@ -3,6 +3,8 @@ require 'file_name'
 require 'bigger'
 require 'writable'
 require 'not'
+require 'or'
+require 'and'
 
 # すべてのファイル名を取得
 expr_all = All.new
@@ -23,3 +25,11 @@ p "readonly files: #{readonly_files}"
 small_expr = Not.new( Bigger.new(1024) )
 small_files = small_expr.evaluate('test_dir')
 p "small files: #{small_files}"
+
+# 書き込み可能でない、大きなMP3ファイルを検索
+complex_expression = And.new(
+                        And.new( Bigger.new(1024), FileName.new('*.mp3') ),
+                        Not.new( Writable.new )
+                      )
+complex_expr_files = complex_expression.evaluate('test_dir')
+p "complex expr files: #{complex_expr_files}"
