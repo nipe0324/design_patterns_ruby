@@ -15,7 +15,7 @@
 * [デコレーター](#decorator)
 * [シングルトン](#singleton)
 * [ファクトリー](#factory)
-* [Builder](#builder)
+* [ビルダー](#builder)
 * [Interpreter](#interpreter)
 
 
@@ -290,6 +290,28 @@
 
 注意点:
   * よく失敗する理由は、Factoryを使うべきでないところで使ってしまうこと。複数の異なる関連したクラスがあり、その中から選ばなければいけない場合にのみ使用する。
+
+
+### ビルダー<a name="builder"></a>
+
+目的/概要:
+  * Builderパターンは、複雑なオブジェクトを構築することに焦点を当てたパターン
+  * 様々な構成パターンがあるオブジェクトの作成やオブジェクトが妥当かを検証することができる
+  * Builderはnewメソッドを複数のメソッドに分けたようなもの
+
+やり方:
+  1. Director(オブジェクトの作成元)とProduct(作成するオブジェクト)の間にBuilderを作成する
+  2. DirectorはBuilderを使うことで、複雑なProductを構築し、Productを取得するため、
+     BuilderにProductを構築するメソッド群と構築されたresultメソッド(Productを取得するメソッド)を定義する
+  3. (おまけ) Builderを使って作成したオブジェクトの妥当性を検証するために、resultメソッドに検証のコードを定義することもできる。
+
+
+注意点:
+  * Builderパターンを必要ないときに使ってしまう。基本的にはnewメソッドを使い、増大する要求が手に負えなくなったときに使用する。
+
+実例:
+  * MailFactory(Factoryという名前にもかかわらずBuilder)
+  * ActiveRecordのfind系
 
 
 ------
