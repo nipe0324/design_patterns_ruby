@@ -14,13 +14,11 @@ module ActiveJob
         @performed_jobs ||= []
       end
 
-      # must define
       def enqueue(job)
         job_data = job_to_hash(job)
         perform_or_enqueue(perform_enqueued_jobs && !filtered?(job), job, job_data)
       end
 
-      # must define
       def enqueue_at(job, timestamp)
         job_data = job_to_hash(job, at: timestamp)
         perform_or_enqueue(perform_enqueued_at_jobs && !filtered?(job), job, job_data)
