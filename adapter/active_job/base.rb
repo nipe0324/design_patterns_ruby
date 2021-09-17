@@ -1,0 +1,9 @@
+module ActiveJob
+  module Base
+    # ...
+    include QueueAdapter
+    # ...
+    include Execution
+    # ...
+  end
+end
